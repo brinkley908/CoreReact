@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { Router, Route, Link } from 'react-router-dom';
+import { Router, Route, Link, Redirect } from 'react-router-dom';
 import { history } from './service/history';
 import { authenticationService } from './service/authenticationService';
 import { PrivateRoute } from './components/PrivateRoute';
@@ -18,7 +18,7 @@ import { ContentContainer } from './components/ContentContainer';
 
 function logout() {
     authenticationService.logout();
-    history.push('/login');
+    history.push('/');
 }
 
 
@@ -55,11 +55,10 @@ export const AppRouter = props => {
                     <Typography component="div" className="typography">
                         <Layout>
                             <ContentContainer >
-                                <Route path="/login" component={AppLogin} />
-
-                                <PrivateRoute exact path='/' component={Home} />
-                                <PrivateRoute path='/counter' component={Counter} />
-                                <PrivateRoute path='/fetch-data' component={FetchData} />
+                                <Route exact path="/" component={AppLogin} />
+                                <PrivateRoute  path='/home' component={Home} />
+                                <PrivateRoute  path='/counter' component={Counter} />
+                                <PrivateRoute  path='/fetch-data' component={FetchData} />
                             </ContentContainer>
                         </Layout>
                     </Typography>

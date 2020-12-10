@@ -25,7 +25,7 @@ export const AppLogin = props => {
 
         await authenticationService.login(model).then(
             user => {
-                const { from } = props.location.state || { from: { pathname: "/" } };
+                const { from } = props.location.state || { from: { pathname: "/home" } };
                 props.history.push(from);
                 setAuth(true);
             },
@@ -38,7 +38,7 @@ export const AppLogin = props => {
 
     useEffect(() => {
         if (authenticationService.currentUserValue) {
-            this.props.history.push('/');
+            props.history.push('/home');
         }
 
     });
