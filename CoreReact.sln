@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30717.126
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreReact", "CoreReact\CoreReact.csproj", "{19F7149C-4BAD-45FF-ADD7-C2F18DC55030}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{19F7149C-4BAD-45FF-ADD7-C2F18DC55030}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19F7149C-4BAD-45FF-ADD7-C2F18DC55030}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19F7149C-4BAD-45FF-ADD7-C2F18DC55030}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19F7149C-4BAD-45FF-ADD7-C2F18DC55030}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		LessCompiler = 19f7149c-4bad-45ff-add7-c2f18dc55030
+		SolutionGuid = {9FB602A2-1BF0-436B-B9F7-0B9052A903E7}
+	EndGlobalSection
+EndGlobal

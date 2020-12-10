@@ -1,0 +1,65 @@
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+.box-shadow {
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.05);
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 999;
+}
+.sticky + .content {
+  margin-top: 90px;
+}
+.home-img {
+  transition: max-height 0.23s;
+  max-height: 115px;
+}
+.home-img-shrink {
+  transition: max-height 0.23s;
+  max-height: 70px;
+}
+.bg-white {
+  background-color: #fff;
+}
+.box-shadow {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+@media (min-width: 576px) {
+  .container {
+    justify-content: left !important;
+  }
+  .nav-menu {
+    position: static !important;
+  }
+}
+.nav-menu {
+  position: absolute;
+  background-color: #fff;
+  z-index: 10001;
+  right: 0;
+}
+.company-name {
+  padding-left: 25px;
+  font-size: 32px;
+  font-weight: 700;
+}
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1001;
+}
