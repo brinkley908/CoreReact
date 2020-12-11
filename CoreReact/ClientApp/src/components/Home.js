@@ -1,4 +1,4 @@
-import { extend } from 'jquery';
+//import { extend } from 'jquery';
 import React, { Component } from 'react';
 
 

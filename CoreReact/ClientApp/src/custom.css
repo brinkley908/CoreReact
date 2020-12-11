@@ -43,12 +43,10 @@ code {
   background-color: #fff;
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+  padding-top: 142px;
 }
 .content-container {
-  margin: 0;
   background-color: #fff;
-  padding: 150px 0 0 0;
 }
 .content-container h2 {
   font-weight: 700;

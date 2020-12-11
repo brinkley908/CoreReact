@@ -3,34 +3,40 @@ import { authenticationService } from './service/authenticationService';
 import * as Models from "./components/models/LoginModel";
 import { Input } from './components/controls/Input';
 import Button from '@material-ui/core/Button';
-import { AuthContext } from './service/authContext';
+import { GlobalContext } from './infrastructure/globalContext';
+import Loader from 'react-loader-spinner'
 import './custom.css'
 
 export const AppLogin = props => {
     document.title = "Login";
 
-    const [email, setEmail] = useState("demouser");
-    const [password, setPassword] = useState("LetMeIn2020!!");
-    const [auth, setAuth] = useContext(AuthContext);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [globalSettings, setGlobalSettings] = useContext(GlobalContext);
+
+    const [state, setState] = useState({
+        Email: "demouser",
+        Password: "LetMeIn2020!!",
+        ErrorMessage: null,
+        Waiting: false
+    });
 
     function validateForm() {
-        return email.length > 0 && password.length > 6;
+        return state.Email.length > 0 && state.Password.length > 6;
     }
 
     async function loginClick() {
 
-        let model = new Models.LoginModel(email, password);
-        let err = "";
+        setState({ ...state, Waiting: true });
+
+        let model = new Models.LoginModel(state.Email, state.Password);
 
         await authenticationService.login(model).then(
             user => {
                 const { from } = props.location.state || { from: { pathname: "/home" } };
                 props.history.push(from);
-                setAuth(true);
+                setGlobalSettings({ ...globalSettings, Authorized: true });
             },
             error => {
-                setErrorMessage(error.message);
+                setState({...state, ErrorMessage: error.message, Waiting: false})
             }
         );
 
@@ -56,36 +62,49 @@ export const AppLogin = props => {
             <Input
                 label="Username"
                 id="username"
-                defaultValue={email}
+                defaultValue={state.Email}
                 variant="filled"
                 placeholder="Username"
                 type="text"
-                onChange={(e) => setEmail(e.target.value)}
-                error={ errorMessage != "" }
+                onChange={(e) => setState({ ...state, Email: e.target.value })}
+                error={ state.ErrorMessage !== null }
             />
 
             <br />
             <br />
 
             <Input
-                label="password"
+                label="Password"
                 id="outlined-error-helper-text"
-                defaultValue={password}
+                defaultValue={state.Password}
                 //  variant="outlined"
-                placeholder="Username"
+                placeholder="Password"
                 type="password"
-                onChange={(e) => setPassword(e.target.value)}
-                error={errorMessage != ""}
+                onChange={(e) => setState({ ...state, Password: e.target.value })}
+                error={state.ErrorMessage !== null}
             />
 
             <div className="error">
-                { errorMessage }
+                {state.ErrorMessage}
             </div>
 
-            <Button variant="contained" color="primary"
-                disabled={!validateForm()}
-                onClick={loginClick}
-            >Sign In</Button>
+            {!state.Waiting &&
+                <Button variant="contained" color="primary"
+                    disabled={!validateForm()}
+                    onClick={loginClick}
+                >Sign In</Button>
+            }
+
+            {state.Waiting &&
+                <Loader
+                    type="ThreeDots"
+                    color="#00BFFF"
+                    height={100}
+                    width={100}
+                    timeout={20000} //3 secs
+
+                />
+            }
 
         </div>
 

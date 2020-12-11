@@ -62,10 +62,10 @@ namespace CoreReact
                     response.StatusCode == (int)HttpStatusCode.Forbidden )
                     response.Redirect( "/" );
 
-                if ( response.StatusCode == (int)HttpStatusCode.Gone )
-                    response.Redirect( "/logout" );
+                //if ( response.StatusCode == (int)HttpStatusCode.Gone )
+                //    response.Redirect( "/logout" );
 
-                response.Redirect( "/" );
+                response.Redirect( "/home" );
 
             } );
 

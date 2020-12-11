@@ -1,7 +1,7 @@
 ﻿Installation
 <br/>
 
-Fix Vulnerabilitiea
+Fix Vulnerabilities
 <br/><be/>
 
 npm audit fix

@@ -1,11 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { Router, Route, Link, Redirect } from 'react-router-dom';
-import { history } from './service/history';
+import { Router, Route } from 'react-router-dom';
+import { history } from './infrastructure/history';
 import { authenticationService } from './service/authenticationService';
 import { PrivateRoute } from './components/PrivateRoute';
 import { AppLogin } from "./AppLogin";
 import { Layout } from './components/Layout';
-import { AuthContext } from './service/authContext';
+import { GlobalContext } from './infrastructure/globalContext';
 import { Home } from "./components/Home";
 import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
@@ -24,9 +24,11 @@ function logout() {
 
 export const AppRouter = props => {
 
-    const [BannerText, setBannerText] = useState("Welcome");
 
-    const [auth, setAuth] = useState(false);
+    const [globalSettings, setGlobalSettings] = useState({
+        Authorized: false,
+        BannerText: "Welcome"
+    });
 
     useEffect(() => {
         checkAuth();
@@ -37,11 +39,10 @@ export const AppRouter = props => {
         var result = await authenticationService.isAuthenticated();
         if (!result) {
             logout();
-            setBannerText("Login");
-            setAuth(false);
+            setGlobalSettings({...globalSettings, Authorized: false, BannerText: "Login" });
         }
         else {
-            setAuth(true);
+            setGlobalSettings({...globalSettings, Authorized: true});
         }
 
     }
@@ -50,9 +51,11 @@ export const AppRouter = props => {
 
         <Router history={history}>
 
-            <AuthContext.Provider value={[BannerText, setBannerText], [auth, setAuth]}>
+            <GlobalContext.Provider value={[globalSettings, setGlobalSettings]}>
                 <Container>
+
                     <Typography component="div" className="typography">
+
                         <Layout>
                             <ContentContainer >
                                 <Route exact path="/" component={AppLogin} />
@@ -63,7 +66,7 @@ export const AppRouter = props => {
                         </Layout>
                     </Typography>
                 </Container>
-            </AuthContext.Provider>
+            </GlobalContext.Provider>
 
         </Router>
 
